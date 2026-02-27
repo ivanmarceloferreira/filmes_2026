@@ -10,10 +10,16 @@ class UsersController {
     }
 
     static async getById(req: Request, res: Response) {
-        console.log('paramestros do request', req.params);
         const { id } = req.params;
         const user = await User.findByPk(Number(id));
 
+        res.send(user);
+    }
+
+    static async create(req: Request, res: Response) {
+        const { name } = req.body;
+
+        const user = await User.create({name: name});
         res.send(user);
     }
 

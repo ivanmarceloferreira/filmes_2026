@@ -10,7 +10,8 @@ router.get('/', (req: Request, res: Response) => {
     res.send("Hello World (typescript)");
 });
 
-router.get('/users', UsersController.list);
+router.get('/users', UsersController.findAll);
+router.get('/users/:id', UsersController.getById);
 
 app.use(router);
 

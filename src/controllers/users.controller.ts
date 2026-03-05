@@ -13,7 +13,7 @@ class UsersController {
         const { id } = req.params;
         const user = await User.findByPk(Number(id));
 
-        res.send(user);
+        res.status(200).send(user);
     }
 
     static async create(req: Request, res: Response) {

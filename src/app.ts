@@ -14,6 +14,7 @@ router.get('/users', UsersController.findAll);
 router.post('/users', UsersController.create);
 router.get('/users/:id', UsersController.getById);
 router.delete('/users/:id', UsersController.remove);
+router.put('/users/:id', UsersController.update);
 
 app.use(router);
 

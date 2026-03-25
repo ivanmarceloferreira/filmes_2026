@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/User";
+import bcrypt from "bcrypt";
 
 class UsersController {
   static async findAll(req: Request, res: Response) {
@@ -33,15 +34,15 @@ class UsersController {
 
     if (!password || password == '') {
         return res.status(400).json({ message: 'Senha é obrigatória!' });
-    } else {
-      // validação da força da senha
-    }
+    } 
+    // validação da força da senha
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     if (!lastName || lastName == '') {
         return res.status(400).json({ message: 'Sobrenome é obrigatório!' });
     }
 
-    const user = await User.create({ name: name, email: email, lastName, password });
+    const user = await User.create({ name: name, email: email, lastName, password: hashedPassword });
     return res.status(200).send(user);
   }
 

@@ -20,7 +20,7 @@ class UsersController {
   }
 
   static async create(req: Request, res: Response) {
-    const { name, email, lastName } = req.body;
+    const { name, email, lastName, password } = req.body;
 
     if (email && email != '') {
         const savedUser = await User.findOne({ where: {email: email} });
@@ -31,11 +31,17 @@ class UsersController {
         return res.status(400).json({ message: 'Email é obrigatório!' });
     }
 
+    if (!password || password == '') {
+        return res.status(400).json({ message: 'Senha é obrigatória!' });
+    } else {
+      // validação da força da senha
+    }
+
     if (!lastName || lastName == '') {
         return res.status(400).json({ message: 'Sobrenome é obrigatório!' });
     }
 
-    const user = await User.create({ name: name, email: email, lastName });
+    const user = await User.create({ name: name, email: email, lastName, password });
     return res.status(200).send(user);
   }
 
@@ -53,14 +59,15 @@ class UsersController {
 
   static async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, email, lastName } = req.body;
+    const { name, email, lastName, password } = req.body;
 
     const user = await User.findByPk(Number(id));
     if (user) {
       await user.update({
         name: name,
         email: email,
-        lastName
+        lastName,
+        password
       });
 
       res.status(200).send(user);

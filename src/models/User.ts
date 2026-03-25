@@ -6,6 +6,7 @@ class User extends Model {
   public name!: string;
   public lastName: string | undefined;
   public email: string | undefined;
+  public password: string | undefined;
 }
 
 User.init(
@@ -23,6 +24,9 @@ User.init(
       type: DataTypes.STRING
     },
     lastName: {
+      type: DataTypes.STRING
+    },
+    password: {
       type: DataTypes.STRING
     },
   },

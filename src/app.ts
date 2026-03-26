@@ -5,6 +5,7 @@ import ActorsController from './controllers/actors.controller';
 import GenresController from './controllers/genres.controller';
 import AuthController from './controllers/auth.controller';
 import "dotenv/config";
+import authMiddleware from './middlewares/auth.middleware';
 
 const app = express();
 app.use(express.json());
@@ -16,7 +17,7 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 // rotas de usuários
-router.get('/users', UsersController.findAll);
+router.get('/users', authMiddleware, UsersController.findAll);
 router.post('/users', UsersController.create);
 router.get('/users/:id', UsersController.getById);
 router.delete('/users/:id', UsersController.remove);

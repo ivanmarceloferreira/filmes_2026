@@ -26,7 +26,7 @@ class AuthController {
             },
             process.env.JWT_SECRET! as string,
             {
-                expiresIn: "1m"
+                expiresIn: "10m"
             }
         );
 

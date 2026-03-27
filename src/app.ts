@@ -19,9 +19,9 @@ router.get('/', (req: Request, res: Response) => {
 // rotas de usuários
 router.get('/users', authMiddleware, UsersController.findAll);
 router.post('/users', UsersController.create);
-router.get('/users/:id', UsersController.getById);
-router.delete('/users/:id', UsersController.remove);
-router.put('/users/:id', UsersController.update);
+router.get('/users/:id', authMiddleware, UsersController.getById);
+router.delete('/users/:id', authMiddleware, UsersController.remove);
+router.put('/users/:id', authMiddleware, UsersController.update);
 
 // rotas de filmes
 router.get('/movies', MoviesController.findAll);
